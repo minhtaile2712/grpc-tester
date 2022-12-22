@@ -1,0 +1,62 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "TMT.Share.CustomerManagement";
+
+service CustomerGrpc {
+  rpc CheckIfCustomerIsValid (CustomerCheckRequest) returns (CustomerCheckReply);
+  rpc GetCustomerInfo (CustomerGetRequest) returns (CustomerGetReply);
+  rpc GetReceiverInfo (ReceiverGetRequest) returns (ReceiverGetReply);
+}
+
+message CustomerCheckRequest {
+  sint64 customer_id = 1;
+  sint64 receiver_id = 2;
+}
+
+message CustomerCheckReply {
+  bool is_customer_valid = 1;
+  bool is_receiver_valid = 2;
+}
+
+message CustomerGetRequest {
+  sint64 id = 1;
+}
+
+message CustomerGetReply {
+  sint64 id = 1;
+  string name = 2;
+  google.protobuf.StringValue phone = 3;
+  google.protobuf.StringValue code = 4;
+  google.protobuf.Timestamp date_of_birth = 5;
+  google.protobuf.StringValue city_code = 6;
+  google.protobuf.StringValue city_name = 7;
+  google.protobuf.StringValue district_code = 8;
+  google.protobuf.StringValue district_name = 9;
+  google.protobuf.StringValue ward_code = 10;
+  google.protobuf.StringValue ward_name = 11;
+  google.protobuf.StringValue street_no = 12;
+  google.protobuf.StringValue email = 13;
+  bool is_success = 14;
+}
+
+message ReceiverGetRequest {
+    sint64 id = 1;
+}
+
+message ReceiverGetReply {
+    sint64 id = 1;
+    string name = 2;
+    google.protobuf.StringValue phone = 3;
+    google.protobuf.StringValue city_code = 4;
+    google.protobuf.StringValue city_name = 5;
+    google.protobuf.StringValue district_code = 6;
+    google.protobuf.StringValue district_name = 7;
+    google.protobuf.StringValue ward_code = 8;
+    google.protobuf.StringValue ward_name = 9;
+    google.protobuf.StringValue street_no = 10;
+    sint64 customer_id = 11;
+    bool is_success = 12;
+}
